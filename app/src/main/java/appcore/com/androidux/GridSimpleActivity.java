@@ -9,18 +9,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CustomArrayAdapterActivity extends AppCompatActivity {
+public class GridSimpleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activitygrid);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -36,29 +37,17 @@ public class CustomArrayAdapterActivity extends AppCompatActivity {
             }
         });
 
-        Person p1 = new Person("Jeremy", "jeremy@test.com");
-        Person p2 = new Person("Mark", "markjeremy@test.com");
-        Person p3 = new Person("Seth", "seth@test.com");
-        Person p4 = new Person("osborne", "osborne@test.com");
-        Person p5 = new Person("jimmy", "jimmy@test.com");
-        Person p6 = new Person("jenny", "jimmy@test.com");
-        Person p7 = new Person("sonya", "jimmy@test.com");
-        Person p8 = new Person("will", "jimmy@test.com");
-        Person p9 = new Person("loki", "jimmy@test.com");
+        String[] values = new String[]{"DroidMax", "iPhone", "WindowsMobile",
+                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
+                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
+                "Android", "iPhone", "WindowsMobile"};
 
-        ArrayList<Person> list = new ArrayList<Person>();
-        list.add(0, p1);
-        list.add(1, p2);
-        list.add(2, p3);
-        list.add(3, p4);
-        list.add(4, p5);
-        list.add(5, p6);
-        list.add(6, p7);
-        list.add(7, p8);
-        list.add(8, p9);
+        ArrayList<String> list = new ArrayList<String>();
+        list.addAll(Arrays.asList(values));
 
-        MySimpleAdapter adapterList = new MySimpleAdapter(this, R.layout.compositerow, list);
-        ListView listView = (ListView) findViewById(R.id.listView);
+        ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this, R.layout.simplegridrow, list);
+        GridView listView = (GridView) findViewById(R.id.gridView);
         listView.setAdapter(adapterList);
 
     }
@@ -84,6 +73,4 @@ public class CustomArrayAdapterActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }
-
