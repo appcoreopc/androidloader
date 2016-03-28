@@ -1,15 +1,22 @@
 package appcore.com.androidux;
 
 import android.content.Context;
+import android.text.Layout;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by Jeremy on 27/3/2016.
- */
-public class MySimpleAdapter extends ArrayAdapter<String> {
+public class MySimpleAdapter extends ArrayAdapter<Person> {
+
+    HashMap<Person, Integer> dataTable = new HashMap<Person, Integer>();
+    LayoutInflater inflater;
+    Context ctx;
+
     public MySimpleAdapter(Context context, int resource) {
         super(context, resource);
     }
@@ -18,44 +25,52 @@ public class MySimpleAdapter extends ArrayAdapter<String> {
         super(context, resource, textViewResourceId);
     }
 
-    public MySimpleAdapter(Context context, int resource, String[] objects) {
+    public MySimpleAdapter(Context context, int resource, Person[] objects) {
         super(context, resource, objects);
     }
 
-    public MySimpleAdapter(Context context, int resource, int textViewResourceId, String[] objects) {
+    public MySimpleAdapter(Context context, int resource, int textViewResourceId, Person[] objects) {
         super(context, resource, textViewResourceId, objects);
     }
 
-    List<String> objectslist;
-
-
-    public MySimpleAdapter(Context context, int resource, List<String> objects) {
+    public MySimpleAdapter(Context context, int resource, List<Person> objects) {
         super(context, resource, objects);
-        objectslist = objects;
 
-        for (int i=0; i < objects.size(); i++)
+        for (int i = 0; i < objects.size(); ++i)
         {
-            mIdMap.put(objects.get(i), i);
+            Person p = objects.get(i);
+            dataTable.put(p, i);
         }
     }
 
-    public MySimpleAdapter(Context context, int resource, int textViewResourceId, List<String> objects) {
+    public MySimpleAdapter(Context context, int resource, int textViewResourceId, List<Person> objects) {
         super(context, resource, textViewResourceId, objects);
     }
 
-    HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-    /*@Override
-    public long getItemId(int position) {
-        String item = getItem(position);
-        return mIdMap.get(item);
-    }*/
+        if (convertView == null)
+            convertView  = LayoutInflater.from(getContext()).inflate(R.layout.compositerow, parent, false);
+
+        Person person = getItem(position);
+        View view = convertView;
+
+        TextView name = (TextView) view.findViewById(R.id.nameTextView);
+        if (name != null)
+            name.setText(person.getName());
+
+        TextView email = (TextView) view.findViewById(R.id.emailTextView);
+        if (email != null)
+            email.setText(person.getEmail());
+
+        return view;
+    }
 
     @Override
-    public String getItem(int position) {
-        //return super.getItem(position);
-        return objectslist.get(position);
-
+    public long getItemId(int position) {
+        Person p = (Person) getItem(position);
+        return dataTable.get(p);
     }
 
     @Override

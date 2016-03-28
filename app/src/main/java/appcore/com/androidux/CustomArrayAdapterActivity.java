@@ -14,7 +14,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CursorAdapterActivity extends AppCompatActivity {
+public class CustomArrayAdapterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +36,20 @@ public class CursorAdapterActivity extends AppCompatActivity {
             }
         });
 
-        String[] values = new String[]{"Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-                "Android", "iPhone", "WindowsMobile"};
+        Person p1 = new Person("Jeremy", "jeremy@test.com");
+        Person p2 = new Person("Mark", "markjeremy@test.com");
+        Person p3 = new Person("Seth", "seth@test.com");
+        Person p4 = new Person("osborne", "osborne@test.com");
+        Person p5 = new Person("jimmy", "jimmy@test.com");
 
-        ArrayList<String> list = new ArrayList<String>();
-        list.addAll(Arrays.asList(values));
+        ArrayList<Person> list = new ArrayList<Person>();
+        list.add(0, p1);
+        list.add(1, p2);
+        list.add(2, p3);
+        list.add(3, p4);
+        list.add(4, p5);
 
-        ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this, R.layout.simplerow, list);
+        MySimpleAdapter adapterList = new MySimpleAdapter(this, R.layout.compositerow, list);
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(adapterList);
 
@@ -72,4 +76,7 @@ public class CursorAdapterActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
+
