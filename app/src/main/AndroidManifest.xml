@@ -22,12 +22,14 @@
             android:name=".GridSimpleActivity"
             android:label="Grid simple"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".TabFragmentActivity" android:label="Fragment tab show" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
     </application>
 
